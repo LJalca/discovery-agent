@@ -1,0 +1,56 @@
+{
+  "discovery": "rendimientopescado",
+  "generated": "2026-06-18",
+  "hypotheses": [
+    {
+      "id": "H-01",
+      "risk": "alto",
+      "assumption": "Sin datos de entrada confiables en recepción, el rendimiento calculado sigue siendo incierto aunque exista un panel digital (recepcion.md).",
+      "hypothesis": "Creemos que el operador de recepción logrará un total de kg por turno con error ≤2% respecto a una auditoría física si registra cada caja en una tablet conectada a la balanza existente, porque hoy el cuello de botella es la planilla de papel que se pierde o se moja y el traslado tardío a Excel.",
+      "metric": "Porcentaje de turnos con ingreso donde el total digital de kg coincide con el pesaje de auditoría dentro de ±2%",
+      "threshold": "≥80% de los turnos con ingreso en 2 semanas (mínimo 8 turnos auditados)",
+      "experiment": "Mago de Oz — tablet con formulario mínimo (peso por caja + total automático) en recepción durante 2 semanas; auditoría cruzada de 1 turno por semana con pesaje independiente de todas las cajas",
+      "decision": "Si pasa → construir R-01, R-02 y R-03 en el MVP; si falla → pivotar a registro por lote (no por caja) o integrar báscula automática antes de escalar el panel de rendimiento"
+    },
+    {
+      "id": "H-02",
+      "risk": "alto",
+      "assumption": "Los supervisores de turno registrarán kilos de lomo en línea con la misma disciplina que hoy llenan la hoja de Excel al cierre (jefe-produccion.md).",
+      "hypothesis": "Creemos que en ≥70% de los intervalos de 2 horas de un turno activo habrá registro de kg de lomo si el supervisor usa una captura digital obligatoria en tablet, porque hoy ya completan la hoja de Excel al final del turno aunque sea inconsistente.",
+      "metric": "Porcentaje de intervalos de 2 horas dentro del turno que tienen al menos un registro de kg de lomo",
+      "threshold": "≥70% de intervalos cubiertos en 10 turnos piloto durante 2 semanas",
+      "experiment": "Concierge — formulario digital en tablet en línea de producción (sin panel ni alertas); el jefe de producción revisa cobertura diaria de intervalos",
+      "decision": "Si pasa → incluir registro de lomo en línea como funcionalidad mínima del MVP; si falla → descartar el panel en tiempo real del piloto y limitar el MVP a recepción + reporte de cierre de turno"
+    },
+    {
+      "id": "H-03",
+      "risk": "alto",
+      "assumption": "El jefe de producción actuará sobre el rendimiento durante el turno si dispone del dato a tiempo; hoy esa cifra es 0 acciones correctivas antes del cierre (jefe-produccion.md, métrica del MVP).",
+      "hypothesis": "Creemos que el jefe de producción documentará al menos una acción correctiva (ajuste de línea, calidad o corte) antes del cierre del turno si recibe una alerta cuando el ratio lomo/materia prima cae bajo umbral, porque hoy se entera horas después y la corrección ya no es posible.",
+      "metric": "Número de turnos con al menos una acción correctiva documentada antes del cierre, motivada por alerta o consulta al ratio en tiempo real",
+      "threshold": "≥3 turnos en un piloto de 4 semanas (la línea base actual es 0)",
+      "experiment": "Mago de Oz — dashboard manual actualizado cada hora con ratio lomo/materia prima + alerta por WhatsApp al jefe cuando el ratio cae bajo umbral acordado; bitácora de acciones correctivas",
+      "decision": "Si pasa → perseverar con panel y alertas (R-04, R-05) como núcleo del MVP; si falla → pivotar: investigar si el bloqueo es autoridad operativa, umbral mal calibrado o datos no confiables (H-01/H-02) antes de construir software"
+    },
+    {
+      "id": "H-04",
+      "risk": "medio",
+      "assumption": "La conectividad y el hardware (tablet/pantalla) resisten las condiciones de frío y humedad en planta pesquera (recepcion.md, R-12).",
+      "hypothesis": "Creemos que el operador de recepción completará el registro digital de un turno completo sin interrupciones por fallo de equipo si usa una tablet con funda protectora en el punto de descarga, porque el dolor actual es el papel que se moja, no la imposibilidad de usar dispositivos en planta.",
+      "metric": "Porcentaje de turnos con ingreso donde el registro digital se completa sin fallo de hardware o software que impida capturar pesos",
+      "threshold": "≥95% de turnos completados sin fallo en 14 turnos consecutivos con ingreso (2 semanas)",
+      "experiment": "Smoke test de hardware — tablet con funda en recepción durante 2 semanas de operación real; registro de incidencias por turno",
+      "decision": "Si pasa → seleccionar ese hardware para el piloto del MVP; si falla → pivotar a terminal fija fuera de zona húmeda o equipo industrial certificado antes del despliegue"
+    },
+    {
+      "id": "H-05",
+      "risk": "medio",
+      "assumption": "Disponer del ratio de rendimiento en menos de 60 segundos cambia el comportamiento del jefe frente a recibir estimados horas después del cierre (jefe-produccion.md, R-11).",
+      "hypothesis": "Creemos que el jefe de producción consultará el ratio lomo/materia prima al menos 3 veces por turno si está disponible en un panel actualizado en menos de 60 segundos, porque hoy espera horas y no puede intervenir mientras el turno sigue activo.",
+      "metric": "Número promedio de consultas al ratio por turno (registradas en log de acceso)",
+      "threshold": "Media ≥3 consultas por turno en ≥80% de los turnos durante 2 semanas (mínimo 8 turnos)",
+      "experiment": "Prototipo desechable — dashboard web con datos actualizados manualmente cada 30 minutos y log de accesos; sin alertas automáticas en esta fase",
+      "decision": "Si pasa → invertir en R-04 y R-11 (panel en tiempo real); si falla → replantear si el valor percibido es bajo o si el jefe delega la consulta; considerar empujar alertas proactivas en lugar de panel pasivo"
+    }
+  ]
+}

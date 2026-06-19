@@ -91,7 +91,7 @@ def first_person_roles_on_disk(interviews_dir):
         except OSError:
             continue
         primera = re.search(r"primera_persona:\s*true", head)
-        rolm = re.search(r"rol_entrevistado:\s*([A-Za-z_\-]+)", head)
+        rolm = re.search(r"rol_entrevistado:\s*(.+)", head)
         if primera and rolm:
             roles.add(rolm.group(1).strip().lower())
     return roles, count
