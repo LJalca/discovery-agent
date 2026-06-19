@@ -1,0 +1,117 @@
+{
+  "discovery": "rendimientopescado",
+  "generated": "2026-06-18",
+  "personas": [
+    {
+      "name": "R. (operador de recepción de materia prima)",
+      "role": "operador de recepción de materia prima",
+      "primary": true,
+      "support": "primera mano",
+      "source": "recepcion.md"
+    },
+    {
+      "name": "J. (jefe de producción)",
+      "role": "jefe de producción",
+      "primary": true,
+      "support": "primera mano",
+      "source": "jefe-produccion.md"
+    },
+    {
+      "name": "B. (responsable de bodega de producto terminado)",
+      "role": "responsable de bodega de producto terminado",
+      "primary": true,
+      "support": "primera mano",
+      "source": "bodega-producto-terminado.md"
+    },
+    {
+      "name": "Gerencia",
+      "role": "gerencia",
+      "primary": false,
+      "support": "referenciada",
+      "source": "jefe-produccion.md"
+    },
+    {
+      "name": "Supervisores de turno",
+      "role": "supervisor de turno",
+      "primary": false,
+      "support": "referenciada",
+      "source": "jefe-produccion.md"
+    },
+    {
+      "name": "Clientes",
+      "role": "cliente",
+      "primary": false,
+      "support": "referenciada",
+      "source": "bodega-producto-terminado.md"
+    },
+    {
+      "name": "Proveedores",
+      "role": "proveedor de materia prima",
+      "primary": false,
+      "support": "referenciada",
+      "source": "recepcion.md"
+    }
+  ],
+  "pains": [
+    {
+      "id": "registro-manual-papel",
+      "source": "recepcion.md",
+      "persona": "operador de recepción de materia prima"
+    },
+    {
+      "id": "peso-incierto-recepcion",
+      "source": "recepcion.md",
+      "persona": "operador de recepción de materia prima"
+    },
+    {
+      "id": "diferencia-peso-proveedor",
+      "source": "recepcion.md",
+      "persona": "operador de recepción de materia prima"
+    },
+    {
+      "id": "imposible-demostrar-perdidas",
+      "source": "recepcion.md",
+      "persona": "operador de recepción de materia prima"
+    },
+    {
+      "id": "rendimiento-sin-dato-tiempo-real",
+      "source": "jefe-produccion.md",
+      "persona": "jefe de producción"
+    },
+    {
+      "id": "correccion-tardia-imposible",
+      "source": "jefe-produccion.md",
+      "persona": "jefe de producción"
+    },
+    {
+      "id": "hoja-calculo-inconsistente",
+      "source": "jefe-produccion.md",
+      "persona": "jefe de producción"
+    },
+    {
+      "id": "estimados-sin-precision-gerencia",
+      "source": "jefe-produccion.md",
+      "persona": "jefe de producción"
+    },
+    {
+      "id": "stock-no-refleja-realidad",
+      "source": "bodega-producto-terminado.md",
+      "persona": "responsable de bodega de producto terminado"
+    },
+    {
+      "id": "disponibilidad-incorrecta-clientes",
+      "source": "bodega-producto-terminado.md",
+      "persona": "responsable de bodega de producto terminado"
+    },
+    {
+      "id": "identificacion-pallets-deficiente",
+      "source": "bodega-producto-terminado.md",
+      "persona": "responsable de bodega de producto terminado"
+    },
+    {
+      "id": "falta-comunicacion-produccion-bodega",
+      "source": "bodega-producto-terminado.md",
+      "persona": "responsable de bodega de producto terminado"
+    }
+  ]
+}
